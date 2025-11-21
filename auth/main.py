@@ -35,6 +35,16 @@ def root():
     }
 
 
+@app.get("/auth")
+def auth():
+    """
+    Welcome to Appify lab auth service
+    """
+    return {
+        "This is the auth service",
+    }
+
+
 @app.get("/health")
 def health():
     """
