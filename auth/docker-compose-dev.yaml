@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    container_name: auth-service
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      - app-network-dev
+
+networks:
+  app-network-dev:
+    driver: bridge
